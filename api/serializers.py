@@ -4,14 +4,14 @@ from .models import Project, Task, ProjectUser
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = '__all__'
+        fields = ['id', 'name', 'description', 'created_by', 'created_at']
 
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = '__all__'
+        fields = ['id', 'title', 'description', 'status', 'due_date', 'project', 'created_by', 'created_at']
 
 class ProjectUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectUser
-        fields = '__all__'
+        fields = ['user', 'project', 'permission']

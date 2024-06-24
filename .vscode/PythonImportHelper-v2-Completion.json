@@ -41,15 +41,6 @@
         "documentation": {}
     },
     {
-        "label": "django.utils.timezone",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "django.utils.timezone",
-        "description": "django.utils.timezone",
-        "detail": "django.utils.timezone",
-        "documentation": {}
-    },
-    {
         "label": "admin",
         "importPath": "django.contrib",
         "description": "django.contrib",
@@ -74,6 +65,14 @@
         "documentation": {}
     },
     {
+        "label": "ValidationError",
+        "importPath": "django.core.exceptions",
+        "description": "django.core.exceptions",
+        "isExtraImport": true,
+        "detail": "django.core.exceptions",
+        "documentation": {}
+    },
+    {
         "label": "User",
         "importPath": "django.contrib.auth.models",
         "description": "django.contrib.auth.models",
@@ -82,19 +81,27 @@
         "documentation": {}
     },
     {
-        "label": "timezone",
-        "importPath": "django.utils",
-        "description": "django.utils",
+        "label": "BasePermission",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
         "isExtraImport": true,
-        "detail": "django.utils",
+        "detail": "rest_framework.permissions",
         "documentation": {}
     },
     {
-        "label": "permissions",
-        "importPath": "rest_framework",
-        "description": "rest_framework",
+        "label": "IsAuthenticated",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
         "isExtraImport": true,
-        "detail": "rest_framework",
+        "detail": "rest_framework.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "IsAuthenticated",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
+        "isExtraImport": true,
+        "detail": "rest_framework.permissions",
         "documentation": {}
     },
     {
@@ -114,7 +121,31 @@
         "documentation": {}
     },
     {
-        "label": "permissions",
+        "label": "viewsets",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "viewsets",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "status",
         "importPath": "rest_framework",
         "description": "rest_framework",
         "isExtraImport": true,
@@ -130,7 +161,7 @@
         "documentation": {}
     },
     {
-        "label": "path",
+        "label": "include",
         "importPath": "django.urls",
         "description": "django.urls",
         "isExtraImport": true,
@@ -138,7 +169,7 @@
         "documentation": {}
     },
     {
-        "label": "include",
+        "label": "path",
         "importPath": "django.urls",
         "description": "django.urls",
         "isExtraImport": true,
@@ -167,6 +198,22 @@
         "description": "rest_framework.routers",
         "isExtraImport": true,
         "detail": "rest_framework.routers",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
+        "isExtraImport": true,
+        "detail": "rest_framework.response",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
+        "isExtraImport": true,
+        "detail": "rest_framework.response",
         "documentation": {}
     },
     {
@@ -258,7 +305,7 @@
         "kind": 6,
         "importPath": "api.models",
         "description": "api.models",
-        "peekOfCode": "class Project(models.Model):\n    name = models.CharField(max_length=255, unique=True)\n    description = models.TextField()\n    created_by = models.ForeignKey(User, related_name='projects', on_delete=models.CASCADE)\n    created_at = models.DateTimeField(default=timezone.now)\n    updated_at = models.DateTimeField(auto_now=True)\n    is_deleted = models.BooleanField(default=False)\n    def __str__(self):\n        return self.name\nclass Task(models.Model):",
+        "peekOfCode": "class Project(models.Model):\n    name = models.CharField(max_length=255, unique=True)\n    description = models.TextField()\n    is_deleted = models.BooleanField(default=False)\n    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_projects')\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now=True)\n    def __str__(self):\n        return self.name\nclass Task(models.Model):",
         "detail": "api.models",
         "documentation": {}
     },
@@ -267,7 +314,7 @@
         "kind": 6,
         "importPath": "api.models",
         "description": "api.models",
-        "peekOfCode": "class Task(models.Model):\n    project = models.ForeignKey(Project, related_name='tasks', on_delete=models.CASCADE)\n    title = models.CharField(max_length=255)\n    description = models.TextField()\n    status = models.CharField(max_length=50)\n    due_date = models.DateTimeField()\n    created_at = models.DateTimeField(default=timezone.now)\n    updated_at = models.DateTimeField(auto_now=True)\n    is_deleted = models.BooleanField(default=False)\n    def __str__(self):",
+        "peekOfCode": "class Task(models.Model):\n    title = models.CharField(max_length=255)\n    description = models.TextField()\n    status = models.CharField(max_length=50)\n    due_date = models.DateField()\n    is_deleted = models.BooleanField(default=False)\n    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='tasks')\n    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_tasks')\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now=True)",
         "detail": "api.models",
         "documentation": {}
     },
@@ -276,25 +323,25 @@
         "kind": 6,
         "importPath": "api.models",
         "description": "api.models",
-        "peekOfCode": "class ProjectUser(models.Model):\n    user = models.ForeignKey(User, on_delete=models.CASCADE)\n    project = models.ForeignKey(Project, on_delete=models.CASCADE)\n    can_create = models.BooleanField(default=False)\n    can_delete = models.BooleanField(default=False)\n    can_edit = models.BooleanField(default=False)\n    can_add_users = models.BooleanField(default=False)",
+        "peekOfCode": "class ProjectUser(models.Model):\n    PERMISSION_CHOICES = [\n        ('view', 'View'),\n        ('create', 'Create'),\n        ('edit', 'Edit'),\n        ('delete', 'Delete'),\n    ]\n    user = models.ForeignKey(User, on_delete=models.CASCADE)\n    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='memberships')\n    permission = models.CharField(max_length=6, choices=PERMISSION_CHOICES, default='view')",
         "detail": "api.models",
         "documentation": {}
     },
     {
-        "label": "IsProjectAdminOrReadOnly",
+        "label": "IsProjectCreator",
         "kind": 6,
         "importPath": "api.permissions",
         "description": "api.permissions",
-        "peekOfCode": "class IsProjectAdminOrReadOnly(permissions.BasePermission):\n    def has_permission(self, request, view):\n        project = Project.objects.get(pk=view.kwargs['pk'])\n        user_permissions = ProjectUser.objects.filter(project=project, user=request.user).first()\n        if request.method in permissions.SAFE_METHODS:\n            return True\n        return user_permissions and user_permissions.can_edit\nclass CanCreateDeleteEdit(permissions.BasePermission):\n    def has_permission(self, request, view):\n        project = Project.objects.get(pk=view.kwargs['pk'])",
+        "peekOfCode": "class IsProjectCreator(BasePermission):\n    def has_permission(self, request, view):\n        if view.action in ['create', 'destroy', 'update', 'partial_update']:\n            return request.user.is_authenticated\n        return True\n    def has_object_permission(self, request, view, obj):\n        return obj.created_by == request.user\nclass HasProjectPermission(BasePermission):\n    def has_permission(self, request, view):\n        if view.action == 'create':",
         "detail": "api.permissions",
         "documentation": {}
     },
     {
-        "label": "CanCreateDeleteEdit",
+        "label": "HasProjectPermission",
         "kind": 6,
         "importPath": "api.permissions",
         "description": "api.permissions",
-        "peekOfCode": "class CanCreateDeleteEdit(permissions.BasePermission):\n    def has_permission(self, request, view):\n        project = Project.objects.get(pk=view.kwargs['pk'])\n        user_permissions = ProjectUser.objects.filter(project=project, user=request.user).first()\n        if request.method in permissions.SAFE_METHODS:\n            return True\n        if request.method == 'POST':\n            return user_permissions and user_permissions.can_create\n        if request.method == 'DELETE':\n            return user_permissions and user_permissions.can_delete",
+        "peekOfCode": "class HasProjectPermission(BasePermission):\n    def has_permission(self, request, view):\n        if view.action == 'create':\n            project = Project.objects.get(pk=view.kwargs['project_pk'])\n            return ProjectUser.objects.filter(user=request.user, project=project, permission='create').exists()\n        return True\n    def has_object_permission(self, request, view, obj):\n        project = obj.project\n        if view.action in ['update', 'partial_update']:\n            return ProjectUser.objects.filter(user=request.user, project=project, permission='edit').exists()",
         "detail": "api.permissions",
         "documentation": {}
     },
@@ -303,7 +350,7 @@
         "kind": 6,
         "importPath": "api.serializers",
         "description": "api.serializers",
-        "peekOfCode": "class ProjectSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Project\n        fields = '__all__'\nclass TaskSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Task\n        fields = '__all__'\nclass ProjectUserSerializer(serializers.ModelSerializer):\n    class Meta:",
+        "peekOfCode": "class ProjectSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Project\n        fields = ['id', 'name', 'description', 'created_by', 'created_at']\nclass TaskSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Task\n        fields = ['id', 'title', 'description', 'status', 'due_date', 'project', 'created_by', 'created_at']\nclass ProjectUserSerializer(serializers.ModelSerializer):\n    class Meta:",
         "detail": "api.serializers",
         "documentation": {}
     },
@@ -312,7 +359,7 @@
         "kind": 6,
         "importPath": "api.serializers",
         "description": "api.serializers",
-        "peekOfCode": "class TaskSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Task\n        fields = '__all__'\nclass ProjectUserSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = ProjectUser\n        fields = '__all__'",
+        "peekOfCode": "class TaskSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Task\n        fields = ['id', 'title', 'description', 'status', 'due_date', 'project', 'created_by', 'created_at']\nclass ProjectUserSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = ProjectUser\n        fields = ['user', 'project', 'permission']",
         "detail": "api.serializers",
         "documentation": {}
     },
@@ -321,7 +368,7 @@
         "kind": 6,
         "importPath": "api.serializers",
         "description": "api.serializers",
-        "peekOfCode": "class ProjectUserSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = ProjectUser\n        fields = '__all__'",
+        "peekOfCode": "class ProjectUserSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = ProjectUser\n        fields = ['user', 'project', 'permission']",
         "detail": "api.serializers",
         "documentation": {}
     },
@@ -330,7 +377,7 @@
         "kind": 5,
         "importPath": "api.urls",
         "description": "api.urls",
-        "peekOfCode": "router = DefaultRouter()\nrouter.register(r'projects', ProjectViewSet)\nrouter.register(r'tasks', TaskViewSet)\nrouter.register(r'project-users', ProjectUserViewSet)\nurlpatterns = [\n    path('', include(router.urls)),\n]",
+        "peekOfCode": "router = DefaultRouter()\nrouter.register(r'projects', ProjectViewSet)\nrouter.register(r'projects/(?P<project_pk>\\d+)/tasks', TaskViewSet, basename='task')\nrouter.register(r'project-users', ProjectUserViewSet)\nurlpatterns = [\n    path('', include(router.urls)),\n]",
         "detail": "api.urls",
         "documentation": {}
     },
@@ -348,7 +395,7 @@
         "kind": 6,
         "importPath": "api.views",
         "description": "api.views",
-        "peekOfCode": "class ProjectViewSet(viewsets.ModelViewSet):\n    queryset = Project.objects.filter(is_deleted=False)\n    serializer_class = ProjectSerializer\n    permission_classes = [permissions.IsAuthenticated]\n    def perform_destroy(self, instance):\n        instance.is_deleted = True\n        instance.save()\nclass TaskViewSet(viewsets.ModelViewSet):\n    queryset = Task.objects.filter(is_deleted=False)\n    serializer_class = TaskSerializer",
+        "peekOfCode": "class ProjectViewSet(viewsets.ModelViewSet):\n    queryset = Project.objects.filter(is_deleted=False)\n    serializer_class = ProjectSerializer\n    permission_classes = [IsAuthenticated, IsProjectCreator]\n    def perform_destroy(self, instance):\n        instance.is_deleted = True\n        instance.save()\nclass TaskViewSet(viewsets.ModelViewSet):\n    serializer_class = TaskSerializer\n    permission_classes = [IsAuthenticated, HasProjectPermission]",
         "detail": "api.views",
         "documentation": {}
     },
@@ -357,7 +404,7 @@
         "kind": 6,
         "importPath": "api.views",
         "description": "api.views",
-        "peekOfCode": "class TaskViewSet(viewsets.ModelViewSet):\n    queryset = Task.objects.filter(is_deleted=False)\n    serializer_class = TaskSerializer\n    permission_classes = [permissions.IsAuthenticated]\n    def perform_destroy(self, instance):\n        instance.is_deleted = True\n        instance.save()\nclass ProjectUserViewSet(viewsets.ModelViewSet):\n    queryset = ProjectUser.objects.all()\n    serializer_class = ProjectUserSerializer",
+        "peekOfCode": "class TaskViewSet(viewsets.ModelViewSet):\n    serializer_class = TaskSerializer\n    permission_classes = [IsAuthenticated, HasProjectPermission]\n    def get_queryset(self):\n        return Task.objects.filter(project__id=self.kwargs['project_pk'], is_deleted=False)\n    def perform_destroy(self, instance):\n        instance.is_deleted = True\n        instance.save()\nfrom rest_framework import viewsets, status\nfrom rest_framework.permissions import IsAuthenticated",
         "detail": "api.views",
         "documentation": {}
     },
@@ -366,7 +413,7 @@
         "kind": 6,
         "importPath": "api.views",
         "description": "api.views",
-        "peekOfCode": "class ProjectUserViewSet(viewsets.ModelViewSet):\n    queryset = ProjectUser.objects.all()\n    serializer_class = ProjectUserSerializer\n    permission_classes = [permissions.IsAuthenticated]",
+        "peekOfCode": "class ProjectUserViewSet(viewsets.ModelViewSet):\n    queryset = ProjectUser.objects.all()\n    serializer_class = ProjectUserSerializer\n    permission_classes = [IsAuthenticated, IsProjectCreator]\n    def create(self, request, *args, **kwargs):\n        serializer = self.get_serializer(data=request.data)\n        serializer.is_valid(raise_exception=True)\n        project = serializer.validated_data['project']\n        if request.user != project.created_by:\n            return Response({\"error\": \"Only the project owner can assign permissions.\"},",
         "detail": "api.views",
         "documentation": {}
     },
@@ -501,7 +548,7 @@
         "kind": 5,
         "importPath": "project_management.settings",
         "description": "project_management.settings",
-        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.1/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nSIMPLE_JWT = {\n    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),",
+        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.1/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nSIMPLE_JWT = {\n    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),",
         "detail": "project_management.settings",
         "documentation": {}
     },
@@ -510,7 +557,7 @@
         "kind": 5,
         "importPath": "project_management.settings",
         "description": "project_management.settings",
-        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.1/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nSIMPLE_JWT = {\n    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),\n    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.1/howto/static-files/\nSTATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nSIMPLE_JWT = {\n    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),\n    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),",
         "detail": "project_management.settings",
         "documentation": {}
     },
@@ -519,7 +566,7 @@
         "kind": 5,
         "importPath": "project_management.settings",
         "description": "project_management.settings",
-        "peekOfCode": "STATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nSIMPLE_JWT = {\n    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),\n    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),\n    'ROTATE_REFRESH_TOKENS': False,\n    'BLACKLIST_AFTER_ROTATION': True,\n    'ALGORITHM': 'HS256',",
+        "peekOfCode": "STATIC_URL = 'static/'\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nSIMPLE_JWT = {\n    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),\n    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),\n    'ROTATE_REFRESH_TOKENS': False,\n    'BLACKLIST_AFTER_ROTATION': True,\n    'ALGORITHM': 'HS256',",
         "detail": "project_management.settings",
         "documentation": {}
     },
@@ -528,7 +575,7 @@
         "kind": 5,
         "importPath": "project_management.settings",
         "description": "project_management.settings",
-        "peekOfCode": "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nSIMPLE_JWT = {\n    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),\n    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),\n    'ROTATE_REFRESH_TOKENS': False,\n    'BLACKLIST_AFTER_ROTATION': True,\n    'ALGORITHM': 'HS256',\n    'SIGNING_KEY': SECRET_KEY,\n    'VERIFYING_KEY': None,\n    'AUTH_HEADER_TYPES': ('Bearer',),",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nSIMPLE_JWT = {\n    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),\n    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),\n    'ROTATE_REFRESH_TOKENS': False,\n    'BLACKLIST_AFTER_ROTATION': True,\n    'ALGORITHM': 'HS256',\n    'SIGNING_KEY': SECRET_KEY,\n    'VERIFYING_KEY': None,\n    'AUTH_HEADER_TYPES': ('Bearer',),",
         "detail": "project_management.settings",
         "documentation": {}
     },
@@ -537,7 +584,7 @@
         "kind": 5,
         "importPath": "project_management.settings",
         "description": "project_management.settings",
-        "peekOfCode": "SIMPLE_JWT = {\n    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),\n    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),\n    'ROTATE_REFRESH_TOKENS': False,\n    'BLACKLIST_AFTER_ROTATION': True,\n    'ALGORITHM': 'HS256',\n    'SIGNING_KEY': SECRET_KEY,\n    'VERIFYING_KEY': None,\n    'AUTH_HEADER_TYPES': ('Bearer',),\n    'USER_ID_FIELD': 'id',",
+        "peekOfCode": "SIMPLE_JWT = {\n    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),\n    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),\n    'ROTATE_REFRESH_TOKENS': False,\n    'BLACKLIST_AFTER_ROTATION': True,\n    'ALGORITHM': 'HS256',\n    'SIGNING_KEY': SECRET_KEY,\n    'VERIFYING_KEY': None,\n    'AUTH_HEADER_TYPES': ('Bearer',),\n    'USER_ID_FIELD': 'id',",
         "detail": "project_management.settings",
         "documentation": {}
     },
@@ -546,7 +593,7 @@
         "kind": 5,
         "importPath": "project_management.urls",
         "description": "project_management.urls",
-        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('api/', include('api.urls')),\n]\nfrom rest_framework_simplejwt.views import (\n    TokenObtainPairView,\n    TokenRefreshView,\n)\nurlpatterns += [\n    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('api/', include('api.urls')),\n    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),\n    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),\n]",
         "detail": "project_management.urls",
         "documentation": {}
     },
